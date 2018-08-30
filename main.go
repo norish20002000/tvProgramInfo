@@ -7,22 +7,20 @@ import (
 	"os"
 	"time"
 
-	"./config"
-
 	"github.com/PuerkitoBio/goquery"
 )
 
 func main() {
-	// if len(os.Args) != 3 {
-	// 	fmt.Print("specify keywork and webhook url.")
-	// 	os.Exit(1)
-	// }
+	if len(os.Args) != 3 {
+		fmt.Print("specify keywork and webhook url.")
+		os.Exit(1)
+	}
 
-	var keyword string = "ビジネス"
-	var webhook string = config.Webhook
+	// var keyword string = "ビジネス"
+	// var webhook string = config.Webhook
 
-	// var keyword string = os.Args[1]
-	// var webhook string = os.Args[2]
+	var keyword string = os.Args[1]
+	var webhook string = os.Args[2]
 
 	today := time.Now()
 	const dayLayout = "20060102"
