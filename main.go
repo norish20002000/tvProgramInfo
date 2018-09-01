@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"time"
+	// "time"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -16,27 +16,27 @@ func main() {
 	// 	os.Exit(1)
 	// }
 
-	var keyword string = "ビジネス"
+	// var keyword string = "ビジネス"
 	// var webhook string = config.Webhook
 
-	// var keyword string = os.Args[1]
-	var webhook string = os.Args[1]
+	var keyword string = os.Args[1]
+	var webhook string = os.Args[2]
 
-	today := time.Now()
-	const dayLayout = "20060102"
-	todayStr := today.Format(dayLayout)
+	// today := time.Now()
+	// const dayLayout = "20060102"
+	// todayStr := today.Format(dayLayout)
 
-	fmt.Print(todayStr + "\n")
-	doc, err := goquery.NewDocument("https://tv.yahoo.co.jp/search/?q=" + keyword + "&d=" + todayStr)
+	doc, err := goquery.NewDocument("https://tv.yahoo.co.jp/search/?q=" + keyword + "&d=" + "20180902")
 	if err != nil {
 		fmt.Print("document not found. ")
 		os.Exit(1)
 	}
 
+	headerStr := ""
 	postText := ""
 	linkUrl := ""
-	postText += "本日のTV番組情報！"
-	postText += "検索ワード : " + keyword + "\n"
+	headerStr += "本日のTV番組情報！"
+	headerStr += "検索ワード : " + keyword + "\n"
 
 	doc.Find(".programlist > li").Each(func(_ int, s *goquery.Selection) {
 		postText += "_"
@@ -57,6 +57,8 @@ func main() {
 		fmt.Print("program not found. ")
 		os.Exit(0)
 	}
+
+	postText = headerStr + postText
 
 	fmt.Print(postText)
 
