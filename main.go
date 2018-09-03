@@ -5,16 +5,16 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	// "time"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
 func main() {
-	// if len(os.Args) != 3 {
-	// 	fmt.Print("specify keywork and webhook url.")
-	// 	os.Exit(1)
-	// }
+	if len(os.Args) != 3 {
+		fmt.Print("specify keywork and webhook url.")
+		os.Exit(1)
+	}
 
 	// var keyword string = "ビジネス"
 	// var webhook string = config.Webhook
@@ -22,11 +22,11 @@ func main() {
 	var keyword string = os.Args[1]
 	var webhook string = os.Args[2]
 
-	// today := time.Now()
-	// const dayLayout = "20060102"
-	// todayStr := today.Format(dayLayout)
+	today := time.Now()
+	const dayLayout = "20060102"
+	todayStr := today.Format(dayLayout)
 
-	doc, err := goquery.NewDocument("https://tv.yahoo.co.jp/search/?q=" + keyword + "&d=" + "20180902")
+	doc, err := goquery.NewDocument("https://tv.yahoo.co.jp/search/?q=" + keyword + "&d=" + todayStr)
 	if err != nil {
 		fmt.Print("document not found. ")
 		os.Exit(1)
