@@ -28,7 +28,8 @@ func main() {
 
 	doc, err := goquery.NewDocument("https://tv.yahoo.co.jp/search/?q=" + keyword + "&d=" + todayStr)
 	if err != nil {
-		fmt.Print("document not found. ")
+		fmt.Print("document not found. \n")
+		fmt.Print(err)
 		os.Exit(1)
 	}
 
